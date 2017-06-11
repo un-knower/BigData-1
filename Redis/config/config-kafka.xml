@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Config>
+	<kafka>
+		
+		<serializerClass>kafka.serializer.StringEncoder</serializerClass>
+		<producerType>async</producerType>
+		
+		<requestRequiredAcks>0</requestRequiredAcks>
+		<messageSendMaxRetries>3</messageSendMaxRetries>
+		<batchNumMessages>10</batchNumMessages>
+		<sendBufferBytes>1024</sendBufferBytes>
+		
+		
+		
+		<queueBufferingMaxMs>5000</queueBufferingMaxMs>
+		<queueBufferingMaxMessages>10000</queueBufferingMaxMessages>
+		<queueEnqueueTimeoutMs>-1</queueEnqueueTimeoutMs>
+		<compressionCodec>snappy</compressionCodec>
+			
+		
+		
+		<requestTimeoutMs>8000</requestTimeoutMs>
+		
+		<groupId>jd-group</groupId>
+		<zookeeperSessionTimeoutMs>4000</zookeeperSessionTimeoutMs>
+		<zookeeperSyncTimeMs>200</zookeeperSyncTimeMs>
+		<autoCommitIntervalMs>1000</autoCommitIntervalMs>
+		<autoOffsetReset>smallest</autoOffsetReset>
+ 
+		<brokerList>ubt202:6667</brokerList>
+		<zkConnect>ubt202:2181,ubt204:2181,ubt203:2181</zkConnect>
+		<metadataBrokerList>ubt202:6667</metadataBrokerList>
+		<defaultTopic>wzt_test5</defaultTopic>		
+	</kafka>
+	<redis>
+		<url>192.168.4.202,192.168.4.203,192.168.4.206</url>
+	</redis>
+ 
+</Config>

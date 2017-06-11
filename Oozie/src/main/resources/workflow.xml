@@ -1,0 +1,27 @@
+<workflow-app xmlns="uri:oozie:workflow:0.4" name="GetSampleData">
+	<start to="shell-node"/>
+	<action name="shell-node">
+		<shell xmlns="uri:oozie:shell-action:0.2">
+			<job-tracker>${jobTracker}</job-tracker>
+			<name-node>${nameNode}</name-node>
+			<configuration>
+				<property>
+					<name>mapred.job.queue.name</name>
+					<value>${queueName}</value>
+				</property>
+			</configuration>
+			<exec>${nameNode}/workflow/sh/dataSample.sh</exec>
+			<argument>1</argument>
+			<argument>%7B%22serviceType%22%3A%22SQL_DATA_SOURCE%22%2C%22params%22%3A%7B%22sourceId%22%3A%221002930816331701794888%22%2C%22name%22%3A%22%E5%8C%BA%E5%9F%9F%E8%B4%A2%E6%94%BF%E9%87%91%E8%9E%8D%E7%AB%9E%E4%BA%89%E5%8A%9B%E6%8C%87%E6%95%B0%22%2C%22params%22%3Anull%2C%22dataType%22%3A%22MYSQL%22%2C%22jsonPath%22%3Anull%2C%22shop%22%3Afalse%2C%22ip%22%3A%22192.168.15.207%22%2C%22username%22%3A%22root%22%2C%22pwd%22%3A%225Rb%21%21%40bqC%25%22%2C%22port%22%3A%223306%22%2C%22dbName%22%3A%22dataSync%22%2C%22tableName%22%3A%22F0373344F7834111B80DBB5352B20E86%22%7D%2C%22output%22%3A%7B%22path%22%3A%22%2F123%2F4e05ec1f5d6e4b3685194d8ba42e56bf%2FdataSource_123_750a480853c7%22%2C%22type%22%3A%22parquet%22%7D%2C%22name%22%3A%7B%22jobid%22%3A%22%24%7Bwf%3Aid%28%29%7D%22%2C%22actionid%22%3A%22dataSource_123_750a480853c7%22%2C%22flowid%22%3A%224e05ec1f5d6e4b3685194d8ba42e56bf%22%2C%22userid%22%3A%22123%22%7D%7D</argument>
+			<argument>GetSampleData</argument>
+			<file>${nameNode}/workflow/sh/dataSample.sh</file>
+			<capture-output/>
+		</shell>
+		<ok to="end"/>
+		<error to="fail"/>
+	</action>
+	<kill name="fail">
+		<message>Script failed, error message[${wf:errorMessage(wf:lastErrorNode())}]</message>
+	</kill>
+	<end name='end'/>
+</workflow-app>
