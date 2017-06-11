@@ -1,0 +1,6 @@
+端口输入：java -cp DataSimulation.jar streamingSimulation /root/application/upload/Information 9999 1000
+
+在DataSimulation.jar目录下运行，streamingSimulation是在DataSimulation.jar的main函数
+/root/application/upload/Information 数据目录
+9999：端口号
+1000（ms）:1s产生一个数据

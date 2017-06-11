@@ -12,13 +12,13 @@ import org.apache.spark.streaming.{Seconds, StreamingContext}
   *
   * 启动demo01后
   *
-  * 在ubt205上输入 nc -lk 9999
+  * 在mac pro 输入 nc -lk 9999
   */
 object demo01 {
   def main(args: Array[String]) {
     val conf = new SparkConf().setMaster("local[*]").setAppName("spark-streaming-wordcount")
     val ssc = new StreamingContext(conf, Seconds(1))
-    val lines = ssc.socketTextStream("ubt205", 9999)
+    val lines = ssc.socketTextStream("localhost", 9999)
 
     //把每一行切成单词
     val words = lines.flatMap(_.split(" "))
