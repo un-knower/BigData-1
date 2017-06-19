@@ -17,7 +17,7 @@ import org.apache.spark.streaming.{Seconds, StreamingContext}
 object demo01 {
   def main(args: Array[String]) {
     val conf = new SparkConf().setMaster("local[*]").setAppName("spark-streaming-wordcount")
-    val ssc = new StreamingContext(conf, Seconds(1))
+    val ssc = new StreamingContext(conf, Seconds(2))
     val lines = ssc.socketTextStream("localhost", 9999)
 
     //把每一行切成单词

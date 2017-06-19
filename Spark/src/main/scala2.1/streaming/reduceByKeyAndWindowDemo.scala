@@ -19,10 +19,11 @@ object reduceByKeyAndWindowDemo {
     val linesDStream=ssc.socketTextStream("localhost",9999)
 
     //将数据中的搜索词取出
-    val wordsDStream=linesDStream.map(_.split(" ")(1))
+//    val wordsDStream=linesDStream.flatMap(_.split(" ")(1))
+
 
     //通过map算子，将搜索词形成键值对(word,1),将搜索词记录为1次
-    val searchwordDStream=wordsDStream.map(searchword=>(searchword,1))
+    val searchwordDStream=linesDStream.map(searchword=>(searchword,1))
 
     //通过reduceByKeyAndWindow算子,每隔5秒统计最近20秒的搜索词出现的次数
     val reduceDStream=searchwordDStream.reduceByKeyAndWindow(

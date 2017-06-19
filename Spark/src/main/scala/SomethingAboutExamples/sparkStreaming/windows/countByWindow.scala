@@ -18,10 +18,10 @@ object countByWindow {
     val sc = new SparkContext(conf)
     val ssc = new StreamingContext(sc,Seconds(2))
     //set the Checkpoint directory
-    ssc.checkpoint("/Res")
+    ssc.checkpoint("/tmp/sparkstreaming")
 
     //get the socket Streaming data
-    val socketStreaming = ssc.socketTextStream("master",9999)
+    val socketStreaming = ssc.socketTextStream("localhost",9999)
 
     val data = socketStreaming.countByWindow(Seconds(6),Seconds(2))
 
