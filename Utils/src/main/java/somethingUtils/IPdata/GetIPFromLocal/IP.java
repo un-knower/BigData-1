@@ -1,4 +1,4 @@
-package somethingUtils.md5;
+package somethingUtils.IPdata.GetIPFromLocal;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -12,6 +12,9 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * 从本地读取ip库
+ */
 public class IP {
 
     public static String randomIp() {
@@ -29,7 +32,6 @@ public class IP {
     }
 
     public static void main(String[] args){
-//        IP.load("/Users/hushiwei/IdeaProjects/BigData/Utils/src/main/resources/ipdb.dat");
         IP.load(IP.class.getClassLoader().getResource("ipdb.dat").getPath());
 
         System.out.println(Arrays.toString(IP.find("118.28.8.8")));
