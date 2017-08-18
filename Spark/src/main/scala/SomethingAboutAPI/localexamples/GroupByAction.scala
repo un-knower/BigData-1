@@ -16,8 +16,12 @@ object GroupByAction {
     val result2 = pairs.groupBy((K: (String, Int)) => K._1,1)
     val result3 = pairs.groupBy((K: (String, Int)) => K._1, new RangePartitioner(3, pairs))
 
+    println("*"*20)
     result1.foreach(println)
+    println("*"*20)
     result2.foreach(println)
+    println("*"*20)
+
     result3.foreach(println)
 
   }

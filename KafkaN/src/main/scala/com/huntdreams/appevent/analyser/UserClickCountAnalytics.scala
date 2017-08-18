@@ -85,6 +85,7 @@ object UserClickCountAnalytics {
     // 累计求和
     val cumulativeUserClicksCountDStream = userClicks
       .updateStateByKey(computeRunningSum)
+
     cumulativeUserClicksCountDStream.foreachRDD(rdd => {
       val responseCodeToCount = rdd.take(100)
       println(s"""|||||----->>>>>cumulativeUserClicksCountDStream: ${responseCodeToCount.mkString("[", ",", "]")}""")

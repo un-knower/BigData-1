@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 /**
@@ -31,5 +32,43 @@ public class basic {
         String f2 = parse.get("f3");
         System.out.println("---"+f2);
 
+    }
+
+
+    @Test
+    public void continuDemo() throws Exception {
+        for (int i = 0; i < 5; i++) {
+            if (i != 3) {
+                continue;
+            } else {
+                System.out.println(i);
+
+            }
+            System.out.println("hello world");
+        }
+
+    }
+
+    @Test
+    public void outDemo() throws Exception {
+        ArrayList<String> list = new ArrayList<>();
+        list.add("hello");
+        list.add("world");
+        list.add("hadoop");
+        list.add("you");
+        list.add("me");
+
+        outter:for (String word : list) {
+
+        }
+    }
+
+    @Test
+    public void intern() throws Exception {
+        String str = "helloworld";
+        byte[] bytes = str.getBytes();
+        System.out.println(bytes.length);
+        String intern = str.intern();
+        System.out.println(intern);
     }
 }

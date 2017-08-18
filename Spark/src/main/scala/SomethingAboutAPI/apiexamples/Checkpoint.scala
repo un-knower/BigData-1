@@ -15,7 +15,7 @@ object Checkpoint {
 
     val conf = new SparkConf().setAppName("Checkpoint").setMaster("local[*]")
     val sc = new SparkContext(conf)
-    sc.setCheckpointDir("D:\\data\\checkpoint")
+    sc.setCheckpointDir("/tmp/sparkdata")
     //  造一些测试数据
     //    0到10，10次循环，10个分区
     //    每次循环里面造100个键值对

@@ -9,6 +9,7 @@ object distinctTest {
 
     val pairs = sc.parallelize(List(1, 2, 2, 3, 2, 1, 4, 5), 3)
 
+
     val result = pairs.distinct(2)
 
     // output

@@ -7,20 +7,16 @@ import org.apache.avro.file.DataFileReader;
 import org.apache.avro.generic.GenericDatumReader;
 import org.apache.avro.generic.GenericRecord;
 import org.apache.avro.io.DatumReader;
-import org.apache.avro.io.Decoder;
-import org.apache.avro.io.DecoderFactory;
-import org.apache.avro.specific.SpecificDatumReader;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.*;
+import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.hdfs.DistributedFileSystem;
 import org.apache.hadoop.hdfs.protocol.DatanodeInfo;
 import org.apache.hadoop.io.IOUtils;
-import scala.util.Try;
 
 import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Scanner;
 
 /**
  * Created by HuShiwei on 2016/9/2 0002.
@@ -40,7 +36,7 @@ public class HDFSApi {
 
     //指定的文件系统地址
 //        URI uri = new URI("hdfs://jusfoun2016:8020");
-    URI uri = new URI("hdfs://ncp162:8020");
+    URI uri = new URI("hdfs://master:8020");
     //返回指定的文件系统    如果在本地测试，需要使用此种方法获取文件系统
     FileSystem fs = FileSystem.get(uri, conf);
 
@@ -320,12 +316,7 @@ public class HDFSApi {
 
 
   public static void main(String[] args) throws IOException, URISyntaxException {
-    Schema schema = null;
-    try {
-      schema = new Schema.Parser().parse(new File("Kafka/avsc/test_schema.avsc"));
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+
     //mkdir();
     //rmdir();
     //ListAllFile();
@@ -334,7 +325,7 @@ public class HDFSApi {
     //getHDFSNodes();
     //getFileLocal();
 //        String path = "hdfs://ncp162:8020/hsw/flume/log/17-02-10/1816/logs-.1486721760238";
-    String path = "hdfs://ncp162:8020/hsw/flume/log/17-02-13/1730/FlumeData.1486978253501.avro";
+    String path = "hdfs://master:8020/user/hsw/aa.txt";
 
     readFile(path);
 

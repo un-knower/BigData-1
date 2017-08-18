@@ -13,8 +13,12 @@ object ReduceByKeyActionTest {
     val pairs = sc.parallelize(data1, 3)
     //val result = pairs.reduce((A, B) => (A._1 + "#" + B._1, A._2 + B._2))
     //val result = pairs.fold(("K0",10))((A, B) => (A._1 + "#" + B._1, A._2 + B._2))
-    val result = pairs.reduceByKey(_ + _, 2)
+    val result = pairs.reduceByKey((x,y)=>reduceFunc(x,y), 2)
+    pairs.reduceByKey(_+_)
     result.foreach(println)
+  }
+  def reduceFunc(ctr:Int,ctr1:Int):Int={
+    ???
   }
 
 }

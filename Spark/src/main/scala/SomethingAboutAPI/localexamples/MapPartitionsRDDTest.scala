@@ -15,6 +15,9 @@ object MapPartitionsRDDTest {
 
     val finalRDD = pairs.mapPartitions(iter => iter.filter(_._2 >= 2))
 
+    val map=Map("s"->1)
+
+
     finalRDD.foreachPartition(iter => {
       while (iter.hasNext) {
         val next = iter.next()
