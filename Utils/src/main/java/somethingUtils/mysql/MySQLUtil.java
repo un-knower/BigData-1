@@ -25,6 +25,13 @@ public class MySQLUtil {
 	}
 
 	/**
+	 * 连接指定 MySQL服务器
+	 */
+	public MySQLUtil(String url, String user, String paw){
+		conn = getConnection(url, user, paw);
+	}
+
+	/**
 	 * 默认连接本地 MySQL服务器  127.0.0.0 mysql root root
 	 */
 	private Connection getConnection(){
@@ -45,7 +52,20 @@ public class MySQLUtil {
 		}
 		return conn;
 	}
+	/**
+	 * 获得给定url、数据库、用户名、密码的连接
+	 */
+	private Connection getConnection(String url, String user, String paw){
+		Connection conn = null;
 
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			conn = DriverManager.getConnection(url , user, paw);
+		} catch (ClassNotFoundException | SQLException e) {
+			e.printStackTrace();
+		}
+		return conn;
+	}
 	/**
 	 * 获得连接
 	 */
@@ -424,7 +444,7 @@ public class MySQLUtil {
 	/**
 	 * 执行SQL以String[][] 的形式返回
 	 */
-	private String[][] select(String sql, boolean isTHead){
+	public String[][] select(String sql, boolean isTHead){
 
 		String[][] result;
 		PreparedStatement ps = null;

@@ -7,9 +7,9 @@ import java.sql.*;
  */
 public class readmysql {
 
-    private static String dmpJdbcUrl = "jdbc:mysql://10.10.25.11:3306/dmp?useUnicode=true&characterEncoding=utf-8";
+    private static String dmpJdbcUrl = "jdbc:mysql://100.10.105.111:3306/dmp?useUnicode=true&characterEncoding=utf-8";
     private static String dmpUser = "root";
-    private static String dmpPasswd = "Oj8nSfQZc4BsS2xv";
+    private static String dmpPasswd = "xxxxxxxx";
 
 
     public static void main(String[] args) {
