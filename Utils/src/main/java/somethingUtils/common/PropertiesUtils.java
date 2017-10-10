@@ -2,7 +2,9 @@ package somethingUtils.common;
 
 import java.io.*;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Properties;
+import java.util.Set;
 
 //关于Properties类常用的操作
 public class PropertiesUtils {
@@ -67,6 +69,26 @@ public class PropertiesUtils {
 
     }
 
+    /**
+     * 读取Properties的全部信息
+     */
+    public static HashMap<String, String> getAllProperties(String configPath) throws IOException {
+
+        HashMap<String, String> params = new HashMap<>();
+        Properties pps = new Properties();
+        pps.load(new InputStreamReader(PropertiesUtils.class.getResourceAsStream(configPath), "UTF-8"));
+        Enumeration en = pps.propertyNames(); //得到配置文件的名字
+
+        while (en.hasMoreElements()) {
+            String strKey = (String) en.nextElement();
+            String strValue = pps.getProperty(strKey);
+            params.put(strKey, strValue);
+
+        }
+        return params;
+
+    }
+
 
     /**
      * 写入Properties信息
@@ -88,5 +110,14 @@ public class PropertiesUtils {
         //以适合使用 load 方法加载到 Properties 表中的格式，
         //将此 Properties 表中的属性列表（键和元素对）写入输出流
         pps.store(out, "Update " + pKey + " name");
+    }
+
+    public static void main(String[] args) throws IOException {
+        HashMap<String, String> map = PropertiesUtils
+            .getAllProperties("/conf.properties");
+        Set<String> strings = map.keySet();
+        for (String key : strings) {
+            System.out.println(key+" : "+map.get(key));
+        }
     }
 }
