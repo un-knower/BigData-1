@@ -12,6 +12,11 @@
     <artifactId>javaPro</artifactId>
 
 
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <hadoop.version>2.5.0-cdh5.3.3</hadoop.version>
+        <package.scope>provided</package.scope>
+    </properties>
 
     <profiles>
         <profile>
@@ -63,6 +68,17 @@
         <groupId>com.alibaba</groupId>
         <artifactId>fastjson</artifactId>
         <version>1.2.28</version>
+    </dependency>
+    <dependency>
+        <groupId>org.apache.hadoop</groupId>
+        <artifactId>hadoop-common</artifactId>
+        <version>${hadoop.version}</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/org.apache.directory.studio/org.apache.commons.io -->
+    <dependency>
+        <groupId>org.apache.directory.studio</groupId>
+        <artifactId>org.apache.commons.io</artifactId>
+        <version>2.4</version>
     </dependency>
 
 </dependencies>
