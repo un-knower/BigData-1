@@ -24,6 +24,7 @@
         <module>Oozie</module>
         <module>Utils</module>
         <module>Es</module>
+      <module>Presto</module>
     </modules>
 
     <properties>
