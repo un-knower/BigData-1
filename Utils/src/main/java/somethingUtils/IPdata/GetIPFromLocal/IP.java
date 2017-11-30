@@ -33,6 +33,8 @@ public class IP {
 
     public static void main(String[] args){
         IP.load(IP.class.getClassLoader().getResource("ipdb.dat").getPath());
+        String[] arr = IP.find("118.28.8.8");
+        System.out.println(arr[0]);
 
         System.out.println(Arrays.toString(IP.find("118.28.8.8")));
         System.out.println(Arrays.toString(IP.find("10.10.15.60")));

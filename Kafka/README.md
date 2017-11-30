@@ -7,7 +7,7 @@
 
 1. 创建一个topic 分区数和复本数都是1
 ```
- ./bin/kafka-topics.sh --create --zookeeper ncp163:2181,ncp161:2181,ncp162:2181 --replication-factor 1 --partition 1 --topic flume-kafka
+ ./bin/kafka-topics.sh --create --zookeeper ncp163:2181,ncp161:2181,ncp162:2181 --replication-factor 1 --partitions 1 --topic flume-kafka
 ```
 
 2. 查看这个topic的信息
