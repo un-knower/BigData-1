@@ -9,10 +9,23 @@ object demod {
     //    val str=map.get("hello").map(_.toUpperCase)
     val str=map.getOrElse("hello",4)
 
-    println(str)
 
     val num=map.get("hello").getOrElse(0)
-    println(num)
+
+
+
+    val aa:Option[String] =null
+
+    if (null==aa) {
+      println("aa is null")
+    }
+
+
+    val orElse = aa.getOrElse("bb")
+    if (orElse.equals("bb")){
+      println("hello world..")
+    }
+
 
   }
 

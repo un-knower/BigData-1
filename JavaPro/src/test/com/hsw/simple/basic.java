@@ -2,10 +2,10 @@ package com.hsw.simple;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import org.junit.Test;
-
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Map;
+import org.junit.Test;
 
 /**
  * Created by hushiwei on 2017/3/29.
@@ -70,5 +70,14 @@ public class basic {
         System.out.println(bytes.length);
         String intern = str.intern();
         System.out.println(intern);
+    }
+
+    @Test
+    public void sort() throws Exception {
+        int[] arr={5,234,5653,2,234};
+        ArrayList<Integer> arr2 = new ArrayList<>();
+        Collections.sort(arr2);
+
+
     }
 }
