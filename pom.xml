@@ -25,6 +25,7 @@
         <module>Utils</module>
         <module>Es</module>
       <module>Presto</module>
+        <module>Spark22</module>
     </modules>
 
     <properties>

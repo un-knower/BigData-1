@@ -31,7 +31,7 @@ object CustomPartitioner {
   }
 
   def main (args: Array[String]) {
-    val conf = new SparkConf().setAppName("Streaming").setMaster("local[4]")
+    val conf = new SparkConf().setAppName("StreamingOffset").setMaster("local[4]")
     val sc = new SparkContext(conf)
 
     val triplets =

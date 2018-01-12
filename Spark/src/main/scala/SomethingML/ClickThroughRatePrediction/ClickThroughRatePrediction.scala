@@ -89,24 +89,24 @@ object ClickThroughRatePrediction {
   ))
 
   case class ClickThroughRatePredictionParams(
-    trainInput: String = null,
-    testInput: String = null,
-    resultOutput: String = null
-  )
+                                               trainInput: String = null,
+                                               testInput: String = null,
+                                               resultOutput: String = null
+                                             )
 
   /**
-   * Try Kaggle's Click-Through Rate Prediction with Logistic Regression Classification
-   * Run with
-   * {{
-   * $SPARK_HOME/bin/spark-submit \
-   *   --class org.apache.spark.examples.kaggle.ClickThroughRatePredictionWitLogisticRegression \
-   *   /path/to/click-through-rate-prediction-assembly-1.1.jar \
-   *   --train=/path/to/train \
-   *   --test=/path/to/test \
-   *   --result=/path/to/result.csv
-   * }}
-   * SEE ALSO: https://www.kaggle.com/c/avazu-ctr-prediction
-   */
+    * Try Kaggle's Click-Through Rate Prediction with Logistic Regression Classification
+    * Run with
+    * {{
+    * $SPARK_HOME/bin/spark-submit \
+    * --class org.apache.spark.examples.kaggle.ClickThroughRatePredictionWitLogisticRegression \
+    * /path/to/click-through-rate-prediction-assembly-1.1.jar \
+    * --train=/path/to/train \
+    * --test=/path/to/test \
+    * --result=/path/to/result.csv
+    * }}
+    * SEE ALSO: https://www.kaggle.com/c/avazu-ctr-prediction
+    */
   def main(args: Array[String]): Unit = {
     val conf = new SparkConf().setAppName(this.getClass.getSimpleName)
     val sc = new SparkContext(conf)
@@ -137,7 +137,7 @@ object ClickThroughRatePrediction {
   }
 
   def runLearning(sc: SparkContext, sqlContext: SQLContext,
-          trainPath: String, testPath: String, resultPath: String): Unit = {
+                  trainPath: String, testPath: String, resultPath: String): Unit = {
     import sqlContext.implicits._
     // Sets the target variables
     val targetVariables = Array(
@@ -157,14 +157,26 @@ object ClickThroughRatePrediction {
       .load(testPath).cache()
 
     train.show()
+    val train4union = train.select(targetVariables.map(col): _*)
+    val test4union = test.select(targetVariables.map(col): _*)
+    val union = train4union.unionAll(test4union).cache()
 
-    test.show()
+    // one -hot encoding 抽取特征
+    def getIndexedCoulumn(clm: String): String = s"${clm}_indexed"
 
+    def getColumnVec(clm: String): String = s"${clm}_vsc"
 
+    val feStages = ArrayBuffer.empty[PipelineStage]
+    targetVariables.foreach { clm =>
+      val stringIndexer = new StringIndexer()
+        .setInputCol(clm)
+        .setOutputCol(getIndexedCoulumn(clm))
+        .setHandleInvalid("error")
+    }
   }
 
   def run(sc: SparkContext, sqlContext: SQLContext,
-      trainPath: String, testPath: String, resultPath: String): Unit = {
+          trainPath: String, testPath: String, resultPath: String): Unit = {
     import sqlContext.implicits._
 
     // Sets the target variables
@@ -193,7 +205,9 @@ object ClickThroughRatePrediction {
 
     // Extracts features with one-hot encoding
     def getIndexedColumn(clm: String): String = s"${clm}_indexed"
+
     def getColumnVec(clm: String): String = s"${clm}_vec"
+
     val feStages = ArrayBuffer.empty[PipelineStage]
     targetVariables.foreach { clm =>
       val stringIndexer = new StringIndexer()

@@ -18,6 +18,7 @@
 package spark.examples.kaggle
 
 import SomethingML.ClickThroughRatePrediction.ClickThroughRatePrediction
+import org.apache.spark.ml.feature.StringIndexer
 import spark.SparkFunSuite
 import spark.util.MLlibTestSparkContext
 
@@ -41,5 +42,23 @@ class ClickThroughRatePredictionSuite extends SparkFunSuite with MLlibTestSparkC
     val resultPath = "./tmp/result/"
     val strings = Array("a","b") //快捷键command+alt+v自动补全
     ClickThroughRatePrediction.runLearning(sc, sqlContext, trainPath, testPath, resultPath)
+  }
+
+  test("simply func"){
+    val targetVariables = Array(
+      "banner_pos", "site_id", "site_domain", "site_category",
+      "app_domain", "app_category", "device_model", "device_type", "device_conn_type",
+      "C1", "C14", "C15", "C16", "C17", "C18", "C19", "C20", "C21"
+    )
+
+    def getIndexedCoulumn(clm: String): String = s"${clm}_indexed"
+    targetVariables.foreach { clm =>
+      val stringIndexer = new StringIndexer()
+        .setInputCol(clm)
+        .setOutputCol(getIndexedCoulumn(clm))
+        .setHandleInvalid("error")
+      println(stringIndexer)
+    }
+
   }
 }

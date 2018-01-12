@@ -37,7 +37,7 @@ object PairRDD {
   }
 
   def main (args: Array[String]) {
-    val conf = new SparkConf().setAppName("Streaming").setMaster("local[4]")
+    val conf = new SparkConf().setAppName("StreamingOffset").setMaster("local[4]")
     val sc = new SparkContext(conf)
 
     val pairs = Seq((1,9), (1,2), (1,1), (2,3), (2,4), (3,1), (3,5), (6,2), (6,1), (6,4), (8,1))
