@@ -1,5 +1,5 @@
 /**
- * Illustrates a simple streaming application
+ * Illustrates a simple SparkStreaming.streaming application
  */
 package base
 
@@ -18,7 +18,7 @@ object StreamingLogInput {
     val errorLines = processLines(lines)
     // Print out the lines with errors, which causes this DStream to be evaluated
     errorLines.print()
-    // start our streaming context and wait for it to "finish"
+    // start our SparkStreaming.streaming context and wait for it to "finish"
     ssc.start()
     // Wait for 10 seconds then exit. To run forever call without a timeout
     ssc.awaitTermination(10000)

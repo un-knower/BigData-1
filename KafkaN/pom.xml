@@ -46,7 +46,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-streaming-flume_2.10</artifactId>
+            <artifactId>spark-SparkStreaming.streaming-flume_2.10</artifactId>
             <version>${spark.version}</version>
             <!--<scope>provided</scope>-->
         </dependency>
@@ -58,7 +58,7 @@
         </dependency>
         <dependency>
             <groupId>org.apache.spark</groupId>
-            <artifactId>spark-streaming-kafka_2.10</artifactId>
+            <artifactId>spark-SparkStreaming.streaming-kafka_2.10</artifactId>
             <version>${spark.version}</version>
             <!--<scope>provided</scope>-->
         </dependency>

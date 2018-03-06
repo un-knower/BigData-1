@@ -1,5 +1,7 @@
 package gettingstarted
 
+import scala.io.Source
+
 /**
   * Created by HuShiwei on 2016/8/24 0024.
   */
@@ -8,27 +10,26 @@ object demo {
 
   def main(args: Array[String]) {
 
-    def fun(a:String): Unit ={
-      println("hello")
+    val log = "/Users/hushiwei/IdeaProjects/BigData/Fpinscala/src/main/resources/demo1.txt"
+    val session = "/Users/hushiwei/IdeaProjects/BigData/Fpinscala/src/main/resources/demo2.txt"
+    val file = Source.fromFile(log).getLines().toList
+    val sessionIds = Source.fromFile(session).getLines().toList
 
+    var result: Set[String] = Set()
 
-    }
-    fun("dfd")
+    for (line <- file) {
+      for (se <- sessionIds) {
 
-    println("---------------")
+        if (!line.contains(se.trim)) {
+          result += line
 
-
-    val list = List(1, 2, 3, 4, 5)
-    println(list.head)
-    println(list.tail)
-
-    println(list)
-    val result = list match {
-      case _ => "hello"
-      case List(1, _, _, _, _) => 1
+        }
+      }
     }
 
-    println(result)
+    for (line <- result) {
+      println("--->" + line)
+    }
   }
 
 }

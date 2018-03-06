@@ -1,5 +1,5 @@
 /**
- * A sample streaming application saves the wordcounts of a specific window in time
+ * A sample SparkStreaming.streaming application saves the wordcounts of a specific window in time
  */
 
 package base

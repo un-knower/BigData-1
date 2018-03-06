@@ -61,7 +61,7 @@ scalastyle.txt
 spark-*-bin-*.tgz
 spark-tests.log
 src_managed/
-streaming-tests.log
+SparkStreaming.streaming-tests.log
 target/
 unit-tests.log
 work/
