@@ -1,13 +1,18 @@
 package SparkStreaming.sparkstreamingBase
 
 import kafka.serializer.StringDecoder
+import org.apache.spark.rdd.RDD
 import org.apache.spark.streaming.kafka.{HasOffsetRanges, KafkaManager, OffsetRange}
+import org.apache.spark.streaming.{Seconds, StreamingContext}
 import org.apache.spark.{SparkConf, SparkContext}
-import org.apache.spark.streaming.{Minutes, Seconds, StreamingContext}
 
 /**
   * Created by hushiwei on 2018/3/6.
-  * desc : 
+  * desc :
+  *
+  * --conf spark.streaming.kafka.maxRetries=50 \
+  * --conf spark.yarn.maxAppAttempts=10 \
+  * --conf spark.yarn.am.attemptFailuresValidityInterval=1h \
   */
 object ManagerOffset {
 
@@ -15,7 +20,7 @@ object ManagerOffset {
     * 初始化spark程序
     */
   def initializeContext(): Any = {
-    val sparkConf = new SparkConf().setAppName("survey-ctr-hbase")
+    val sparkConf = new SparkConf().setAppName("sparkstreaming-kafka-offset-zk")
       .setMaster("local[*]")
 
     val sc = new SparkContext(sparkConf)
@@ -23,11 +28,15 @@ object ManagerOffset {
     (sc, ssc)
   }
 
+  def processRDD(rdd: RDD[(String, String, String)]): Unit = {
+    val message = rdd.map(_._2)
+    message.foreach(println)
+
+  }
+
   def main(args: Array[String]): Unit = {
 
     val (sc: SparkContext, ssc: StreamingContext) = initializeContext
-
-    //    ssc.checkpoint(ConfParms.CHECKPOINTDIR)
 
     // Create direct kafka stream with brokers and topics
     val topics = Set("my_test")
@@ -48,8 +57,11 @@ object ManagerOffset {
     val message = stream.transform { rdd =>
       offsetRanges = rdd.asInstanceOf[HasOffsetRanges].offsetRanges
       rdd
-    }.foreachRDD { rdd =>
-      rdd.foreach(println)
+    }
+
+
+    message.foreachRDD { rdd =>
+      processRDD(rdd)
       for (o <- offsetRanges) {
         println(s"${o.topic} .... partition->${o.partition} .... fromOffset->${o.fromOffset} .... untilOffset->${o.untilOffset}")
       }
