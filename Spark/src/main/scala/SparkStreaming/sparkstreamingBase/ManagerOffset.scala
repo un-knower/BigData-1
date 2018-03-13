@@ -50,7 +50,6 @@ object ManagerOffset {
     )
 
     val km = new KafkaManager(kafkaParams)
-
     val stream = km.createDirectStream[String, String, StringDecoder, StringDecoder](ssc, kafkaParams, topics)
     var offsetRanges = Array[OffsetRange]()
 

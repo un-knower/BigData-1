@@ -9,16 +9,14 @@ import org.apache.spark.sql.SparkSession
   */
 object demo01 {
   def main(args: Array[String]): Unit = {
-    val spark = SparkSession
-      .builder()
-      .appName("Spark SQL basic example")
-      .config("spark.some.config.option", "some-value")
+    val spark = SparkSession.builder
       .master("local[*]")
+      .appName("my-spark-app")
+      .config("spark.some.config.option", "config-value")
       .getOrCreate()
 
-    import spark.implicits._
-    val df=spark.read.json("")
-    df.show()
+
+
   }
 
 }
