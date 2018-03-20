@@ -6,7 +6,7 @@ import org.apache.spark.sql.SparkSession
   * Created by hushiwei on 2018/3/8.
   * desc : 
   */
-object basic01 {
+object JsonToDF {
   def main(args: Array[String]): Unit = {
     val sparkSession = SparkSession.builder
       .master("local")
@@ -15,6 +15,7 @@ object basic01 {
       .getOrCreate()
 
     val jsonData=sparkSession.read.json("Spark22/src/main/resources/people.json")
+    jsonData.show()
 
 
 

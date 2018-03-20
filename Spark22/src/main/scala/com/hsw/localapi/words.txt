@@ -1,5 +1,0 @@
-spark
-hadoop
-hello
-kafka
-hehe
